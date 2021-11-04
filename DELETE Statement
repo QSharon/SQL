@@ -1,0 +1,54 @@
+#DELETE Statement -1
+/*
+Description: 现有一张试卷作答记录表exam_record，其中包含多年来的用户作答试卷记录，结构如下表：
+
+作答记录表exam_record：
+start_time是试卷开始时间
+submit_time 是交卷，即结束时间
+
+https://www.nowcoder.com/practice/d331359c5ca04a3b87f06b97da42159c?tpId=240&tags=&title=&difficulty=0&judgeStatus=0&rp=0
+
+请删除exam_record表中作答时间小于5分钟整且分数不及格（及格线为60分）的记录；
+
+DELETE FROM exam_record
+WHERE timestampdiff(minute, start_time, submit_time) < 5 AND score < 60;
+*/
+
+#Key Point: timestampdiff(unit，start_time, end_time), 有效unit有：MICROSECOND, SECOND, MINUTE, HOUR, DAY, WEEK, MONTH, QUARTER, YEAR
+
+
+#DELETE Statement -2
+/*
+现有一张试卷作答记录表exam_record，其中包含多年来的用户作答试卷记录，结构如下表：
+
+作答记录表exam_record：
+start_time是试卷开始时间
+submit_time 是交卷，即结束时间
+
+https://www.nowcoder.com/practice/964c9f7fffbb4ab18b507cfed4111b4a?tpId=240&tags=&title=&difficulty=0&judgeStatus=0&rp=0
+
+请删除exam_record表中未完成作答或作答时间小于5分钟整的记录中，开始作答时间最早的3条记录。
+*/
+
+DELETE FROM exam_record
+WHERE score is NULL or timestampdiff(minute, start_time, submit_time) < 5
+ORDER BY start_time ASC
+LIMIT 3;
+
+#DELETE Statement -3
+/*
+现有一张试卷作答记录表exam_record，其中包含多年来的用户作答试卷记录，结构如下表：
+
+https://www.nowcoder.com/practice/3abefc6fc73e4f219dad0ab66e6b1e3f?tpId=240&tags=&title=&difficulty=0&judgeStatus=0&rp=0
+
+请删除exam_record表中所有记录，并重置自增主键。
+*/
+
+TRUNCATE TABLE exam_record;
+
+#Key Point: TRUNCATE TABLE Statement (truncate table 在功能上，与不带where字句的delete语句相同；二者均删除表中的全部行，但truncate table 比delete速度更快，且使用的系统和事务日志资源少。)
+#TRUNCATE vs DELETE
+#1. truncate速度快，不做日志记录，故无法进行rollback操作。 delete反之。
+#2. truncate会重置索引和自增初始值, delete则不会
+#3. truncate不会触发trigger，而delete则会触发。
+Description:
