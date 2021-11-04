@@ -27,9 +27,10 @@ A.T_DATE = B.T_DATE+ interval -'1' hour 1小时之前
 #表示方法3
 A.T_DATE = B.T_DATE- interval -'1' hour 1小时之后（负负得正）
 
+
 # INSERT Statement -2
 /*
-现有一张试卷作答记录表exam_record，结构如下表，其中包含多年来的用户作答试卷记录，由于数据越来越多，维护难度越来越大，需要对数据表内容做精简，历史数据做备份。
+Description: 现有一张试卷作答记录表exam_record，结构如下表，其中包含多年来的用户作答试卷记录，由于数据越来越多，维护难度越来越大，需要对数据表内容做精简，历史数据做备份。
 表exam_record：
 
 https://www.nowcoder.com/practice/9681abf28745468c8adacb3b029a18ce?tpId=240&tags=&title=&difficulty=0&judgeStatus=0&rp=0
@@ -43,7 +44,24 @@ SELECT NULL, uid, exam_id, start_time, submit_time, score
 FROM exam_record 
 WHERE year(submit_time) < 2021;
 
-#Key Point:
-新表有自己的AI序号，不用原表id列, 所以这里的id输入为NULL
+#Key Point: 新表有自己的AI序号，不用原表id列, 所以这里的id输入为NULL
+
 
 # INSERT Statement -3
+/*
+Description: 现在有一套ID为9003的高难度SQL试卷，时长为一个半小时，请你将 2021-01-01 00:00:00 作为发布时间插入到试题信息表examination_info（其表结构如下图），不管该ID试卷是否存在，都要插入成功，请尝试插入它。
+
+试题信息表examination_info：
+https://www.nowcoder.com/practice/978bcee6530a430fb0be716423d84082?tpId=240&tags=&title=&difficulty=0&judgeStatus=0&rp=0
+*/
+
+REPLACE INTO examination_info(id, exam_id, tag, difficulty, duration, release_time)
+VALUES(NULL, 9003, 'SQL', 'hard', 90, '2021-01-01 00:00:00');
+
+#Key Point: 
+#1.如果发现表中已经有此行数据（根据主键或者唯一索引判断）则先删除此行数据，然后插入新的数据；
+DELETE FROM table_name
+Where ...;
+#2.否则，直接插入新数据;
+REPLACE INTO table_name(column_name1, column_name2,...)
+VALUES(value1, value2,...);
