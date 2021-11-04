@@ -1,0 +1,24 @@
+#UPDATE Statement -1
+/*
+现有一张试卷信息表examination_info，表结构如下图所示：
+https://www.nowcoder.com/practice/bfe8ad2bddc540fc911614aa648868b3?tpId=240&tags=&title=&difficulty=0&judgeStatus=0&rp=0
+请把examination_info表中tag为PYTHON的tag字段全部修改为Python。
+
+UPDATE examination_info
+SET tag = 'Python'
+Where tag = 'PYTHON';
+
+
+#UPDATE Statement -2
+/*
+现有一张试卷作答记录表exam_record，其中包含多年来的用户作答试卷记录，结构如下表：
+作答记录表exam_record：
+submit_time为 完成时间
+https://www.nowcoder.com/practice/0c2e81c6b62e4a0f848fa7693291defc?tpId=240&tags=&title=&difficulty=0&judgeStatus=0&rp=0
+请把exam_record表中2021年9月1日之前开始作答的未完成记录全部改为被动完成，即：将完成时间改为'2099-01-01 00:00:00'，分数改为0。
+
+UPDATE exam_record
+SET submit_time = '2099-01-01 00:00:00', score = 0
+WHERE start_time < '2021-09-01 00:00:00' AND score is NULL;
+
+#Key Point: NULL的判断是使用is;
