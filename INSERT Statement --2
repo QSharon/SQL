@@ -2,6 +2,8 @@
 现有一张试卷作答记录表exam_record，结构如下表，其中包含多年来的用户作答试卷记录，由于数据越来越多，维护难度越来越大，需要对数据表内容做精简，历史数据做备份。
 表exam_record：
 
+![image](https://github.com/QSharon/SQL/blob/main/Insert-2.png)
+
 我们已经创建了一张新表exam_record_before_2021用来备份2021年之前的试题作答记录，结构和exam_record表一致，请将2021年之前的已完成了的试题作答纪录导入到该表。
 后台会通过执行"SELECT * FROM exam_record_before_2021;"语句来对比结果
 */
