@@ -37,7 +37,7 @@ LIMIT 3;
 
 #DELETE Statement -3
 /*
-现有一张试卷作答记录表exam_record，其中包含多年来的用户作答试卷记录，结构如下表：
+Description: 现有一张试卷作答记录表exam_record，其中包含多年来的用户作答试卷记录，结构如下表：
 
 https://www.nowcoder.com/practice/3abefc6fc73e4f219dad0ab66e6b1e3f?tpId=240&tags=&title=&difficulty=0&judgeStatus=0&rp=0
 
@@ -51,4 +51,3 @@ TRUNCATE TABLE exam_record;
 #1. truncate速度快，不做日志记录，故无法进行rollback操作。 delete反之。
 #2. truncate会重置索引和自增初始值, delete则不会
 #3. truncate不会触发trigger，而delete则会触发。
-Description:
