@@ -1,0 +1,51 @@
+#CREATE Statement -1
+/*
+现有一张用户信息表，其中包含多年来在平台注册过的用户信息，随着牛客平台的不断壮大，用户量飞速增长，为了高效地为高活跃用户提供服务，现需要将部分用户拆分出一张新表。
+原来的用户信息表：
+
+https://www.nowcoder.com/practice/a61ee5519d14444aa99e530309a8e043?tpId=240&tqId=2223564&ru=/ta/sql-advanced&qru=/ta/sql-advanced/question-ranking
+
+作为数据分析师，请创建一张优质用户信息表user_info_vip，表结构和用户信息表一致。
+*/
+
+create table user_info_vip(
+id int(11) not null primary key auto_increment comment '自增ID',
+uid int(11) not null unique key comment '用户ID',
+nick_name varchar(64) comment '昵称',
+achievement int(11) default 0 comment '成就值',
+level int(11) comment '用户等级',
+job varchar(32) comment '职业方向',
+register_time datetime default current_timestamp comment '注册时间'
+) default charset=utf8
+
+#Key Point:
+#1. comment: 加个注释，方便日后维护，写注释是个好习惯，有的公司的 SQL 工单平台甚至会强制必须有注释。
+#2. auto_increment: MySQL 一张表中可以指定一个字段为 auto increment，这样在当这个字段没有指定值时就在当前表最大值的基础上自增。
+#3. character set: 可以指定这个表使用的默认字符集（因为也可以针对列单独设置字符集），如果表不指定或者设置成 default 的话则会使用库的默认字符集，如果数据库的也没有设置的，MySQL Server 的默认字符集是 utf8mb4。
+
+#ALTER Statement 
+/*
+Description: 现有一张用户信息表user_info，其中包含多年来在平台注册过的用户信息。
+用户信息表user_info：
+
+https://www.nowcoder.com/practice/d08209df6f464cebafda5dfd5de03fce?tpId=240&tags=&title=&difficulty=0&judgeStatus=0&rp=0
+
+请在用户信息表，字段level的后面增加一列最多可保存15个汉字的字段school；并将表中job列名改为profession，achievement的默认值设置为0。
+*/
+
+
+ALTER Table user_info ADD COLUMN school varchar(15) after level;
+#Key Point 1: 增加列在某列之后
+#ALTER TABLE table_name ADD COLUMN column_name date_type 位置(after level 即在level 之后)
+
+ALTER TABLE user_info CHANGE job profession varchar(10);
+#Key Point 2: 更换列的名称及数据类型
+#ALTER TABLE table_name CHANGE old_column_name new_column_name new_data_type
+
+ALTER TABLE user_info MODIFY achievement int(11) default 0;
+#Key Point 3: 更改数据类型
+#ALTHER TABLE table_name MODIFY 修改列名称 数据类型 默认值等
+
+#Change vs Modify
+1. change 可以更改列名和列类型 (每次都要把新列名和旧列名写上, 即使两个列名没有更改,只是改了类型)
+2. modify 只能更改列属性 只需要写一次列名, 比change 省事点
