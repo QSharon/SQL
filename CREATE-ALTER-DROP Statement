@@ -47,5 +47,11 @@ ALTER TABLE user_info MODIFY achievement int(11) default 0;
 #ALTHER TABLE table_name MODIFY 修改列名称 数据类型 默认值等
 
 #Change vs Modify
-1. change 可以更改列名和列类型 (每次都要把新列名和旧列名写上, 即使两个列名没有更改,只是改了类型)
-2. modify 只能更改列属性 只需要写一次列名, 比change 省事点
+#1. change 可以更改列名和列类型 (每次都要把新列名和旧列名写上, 即使两个列名没有更改,只是改了类型)
+#2. modify 只能更改列属性 只需要写一次列名, 比change 省事点
+
+
+#DROP vs TRUNCATE vs DELETE
+#1. DROP: 删除表，并释放空间，将表删除的一干二净。
+#2. TRUNCATE: 删除表test里的内容，并释放空间，但不删除表的定义，表的结构还在。
+#3. 删除指定数据; 删除整个表 (仅删除表test内的所有内容，保留表的定义，不释放空间。)
