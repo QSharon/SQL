@@ -1,0 +1,25 @@
+# 创建索引
+
+CREATE INDEX idx_duration ON examination_info(duration);
+#Key Point 1: 创建索引 CREATE INDEX index_name ON table_name(column_name1, column_name2,...);
+
+CREATE UNIQUE INDEX uniq_idx_exam_id ON examination_info(exam_id);
+#Key Point 2: 创建唯一索引 CREATE UNIQUE INDEX index_name ON table_name(column_name1, column_name2,...);
+
+CREATE FULLTEXT INDEX full_idx_tag ON examination_info(tag);
+#Key Point 3: 创建全文索引 CREATE FULLTEXT INDEX index_name ON table_name(column_name1, column_name2,...);
+
+#注意，使用ALTER命令添加索引：
+#1. ALTER TABLE tbl_name ADD PRIMARY KEY (column_list): 该语句添加一个主键，这意味着索引值必须是唯一的，且不能为NULL。
+#2. ALTER TABLE tbl_name ADD UNIQUE index_name (column_list): 这条语句创建索引的值必须是唯一的（除了NULL外，NULL可能会出现多次）。
+#3. ALTER TABLE tbl_name ADD INDEX index_name (column_list): 添加普通索引，索引值可出现多次。
+#4. ALTER TABLE tbl_name ADD FULLTEXT index_name (column_list):该语句指定了索引为 FULLTEXT ，用于全文索引。
+
+#删除索引
+DROP INDEX uniq_idx_exam_id ON examination_info;
+#Key Point 4: DROP INDEX index_name ON table_name
+
+DROP INDEX full_idx_tag ON examination_info;
+#Key Point 5: 可以使用DROP和ALTER来删除索引
+#1. DROP INDEX index_name ON table_name;
+#2. ALTER TABLE table_name DROP INDEX index_name;
