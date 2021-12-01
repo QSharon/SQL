@@ -2,7 +2,7 @@
 从exam_record数据表中计算所有用户完成SQL类别高难度试卷得分的截断平均值（去掉一个最大值和一个最小值后的平均值）。
 示例数据：examination_info（exam_id试卷ID, tag试卷类别, difficulty试卷难度, duration考试时长, release_time发布时间）
 示例数据：exam_record（uid用户ID, exam_id试卷ID, start_time开始作答时间, submit_time交卷时间, score得分）
-*\
+*/
 
 SELECT ei.tag, ei.difficulty, ROUND((SUM(er.score)-MAX(er.score)-MIN(er.score))/(count(er.score)-2),1) AS clip_avg_score
 FROM exam_record er 
