@@ -1,1 +1,10 @@
+SELECT ei.tag, ei.difficulty, ROUND((SUM(er.score)-MAX(er.score)-MIN(er.score))/(count(er.score)-2),1) 
+FROM exam_record er 
+LEFT JOIN examination_info ei 
+ON er.exam_id=ei.exam_id
+WHERE ei.tag='SQL' AND ei.difficulty='hard';
 
+/
+1. 截断平均值(trimmed mean)：去掉一个最大值和一个最小值后的平均值
+2. 计算截断平均值：(和-最大值-最小值) / (总个数-2): (sum(score) - max(score) - min(score)) / (count(score) - 2)
+\
