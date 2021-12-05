@@ -3,6 +3,7 @@
 示例数据（uid用户ID, exam_id试卷ID, start_time开始作答时间, submit_time交卷时间, score得分）
 */
 
+#Method-1
 SELECT COUNT(exam_id) AS total_pv, 
        COUNT(submit_time) AS complete_pv, 
        COUNT(DISTINCT
@@ -11,4 +12,27 @@ SELECT COUNT(exam_id) AS total_pv,
        END) AS complete_exam_cnt
 FROM exam_record;
 
-#Key Points:
+#Key Point:
+#1. CASE...WHEN Clause
+SELECT column_name
+       CASE
+           WHEN condition_1 THEN result_1
+           WHEN condition_2 THEN result_2
+           ELAS
+       END AS
+FROM table_name;
+
+#Method-2
+SELECT COUNT(exam_id) AS total_pv, 
+       COUNT(submit_time) AS complete_pv, 
+       COUNT(DISTINCT
+       IF(submit_time IS NOT NULL, exam_id, NULL)) AS complete_exam_cnt
+FROM exam_record;
+
+#Key Point:
+#2. Count with If Condition
+SELECT [DISTINCT] COUNT([DISTINCT] 
+           IF(<condition>, <expression>, NULL)) 
+           AS alias_name 
+FROM table_name;
+#3. IF Function: IF(condition, value_if_true, value_if_false)
