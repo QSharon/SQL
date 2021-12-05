@@ -1,0 +1,14 @@
+/*
+有一个试卷作答记录表exam_record，请从中统计出总作答次数total_pv、试卷已完成作答数complete_pv、已完成的试卷数complete_exam_cnt。
+示例数据（uid用户ID, exam_id试卷ID, start_time开始作答时间, submit_time交卷时间, score得分）
+*/
+
+SELECT COUNT(exam_id) AS total_pv, 
+       COUNT(submit_time) AS complete_pv, 
+       COUNT(DISTINCT
+       CASE
+           WHEN submit_time IS NOT NULL THEN exam_id
+       END) AS complete_exam_cnt
+FROM exam_record;
+
+#Key Points:
