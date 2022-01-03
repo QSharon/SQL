@@ -2,5 +2,19 @@
 Description:
 请从试卷作答记录表中找到SQL试卷得分不小于该类试卷平均得分的用户最低得分。
 示例数据 exam_record表（uid用户ID, exam_id试卷ID, start_time开始作答时间, submit_time交卷时间, score得分）：
-*\
+*/
+
+#Method:
+SELECT MIN(er.score) AS min_score_over_avg
+FROM exam_record er
+LEFT JOIN examination_info ei ON er.exam_id = ei.exam_id
+WHERE ei.tag = 'SQL'
+AND er.score >= 
+(SELECT AVG(er.score) FROM exam_record er
+LEFT JOIN examination_info ei 
+ON er.exam_id = ei.exam_id
+WHERE ei.tag = 'SQL'); 
+
+#Key Point:
+#
 
