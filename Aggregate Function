@@ -1,0 +1,6 @@
+/*
+Description:
+请从试卷作答记录表中找到SQL试卷得分不小于该类试卷平均得分的用户最低得分。
+示例数据 exam_record表（uid用户ID, exam_id试卷ID, start_time开始作答时间, submit_time交卷时间, score得分）：
+*\
+
